@@ -35,7 +35,7 @@ public class GameManagerTest {
         GameManager gameManager = new GameManager(3);
 
         Tile tile1 = new Tile(1, 1, 2, 3);
-        Tile tile2 = new Tile(2, 7, 4, 1);
+        Tile tile2 = new Tile(2, 7g, 4, 1);
         Tile tile3 = new Tile(3, 5, 6, 7);
         Tile tile4 = new Tile(2, 2, 5, 6);
         Tile tile5 = new Tile(4, 3, 7, 2);
