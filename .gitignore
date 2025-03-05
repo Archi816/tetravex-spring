@@ -1,0 +1,11 @@
+echo "target/
+.idea/
+.mvn/wrapper/
+pom.xml.tag
+pom.xml.releaseBackup
+*.log
+*.iml
+.DS_Store
+.classpath
+.project
+.settings/" >> .gitignore
