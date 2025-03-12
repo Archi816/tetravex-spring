@@ -1,4 +1,4 @@
-echo "target/
+echo "target
 .idea/
 .mvn/wrapper/
 pom.xml.tag
@@ -7,5 +7,6 @@ pom.xml.releaseBackup
 *.iml
 .DS_Store
 .classpath
+.mvn
 .project
 .settings/" >> .gitignore

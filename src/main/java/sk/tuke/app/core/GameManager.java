@@ -3,11 +3,11 @@ package sk.tuke.app.core;
 import java.util.Random;
 
 public class GameManager {
-    private Grid grid;
+    private Field field;
     private Tile[] tiles;
 
     public GameManager(int size) {
-        this.grid = new Grid(size);
+        this.field = new Field(size);
         this.tiles = new Tile[size * size];
         generateTiles();
     }
@@ -20,14 +20,18 @@ public class GameManager {
     }
 
     public boolean placeTile(Tile tile, int x, int y) {
-        if (grid.isPlacementValid(tile, x, y)) {
-            return grid.placeTile(tile, x, y);
+        if (field.isValidPosition(x, y)) {
+            return field.placeTile(tile, x, y);
         }
         return false;
     }
 
+    public Field getField() {
+        return field;
+    }
+
     public boolean checkWinCondition() {
-        return grid.isGameWon();
+        return field.isGameWon();
     }
 }
 
