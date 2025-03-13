@@ -12,8 +12,8 @@ public class CommentServiceJDBC implements CommentService {
     private static final String USER = "postgres";
     private static final String PASSWORD = "qm_xcklv";
 
-    private static final String INSERT = "INSERT INTO comment (game, player, comment, commentedOn) VALUES (?, ?, ?, ?)";
-    private static final String SELECT = "SELECT game, player, comment, commentedOn FROM comment WHERE game = ? ORDER BY commentedOn DESC LIMIT 10";
+    private static final String INSERT = "INSERT INTO comment (game, player, comment, commentedon) VALUES (?, ?, ?, ?)";
+    private static final String SELECT = "SELECT game, player, comment, commentedon FROM comment WHERE game = ? ORDER BY commentedon DESC LIMIT 20";
     private static final String DELETE = "DELETE FROM comment";
 
 
@@ -34,20 +34,21 @@ public class CommentServiceJDBC implements CommentService {
 
     @Override
     public List<Comment> getComments(String game) throws CommentException {
-        try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            PreparedStatement statement = connection.prepareStatement(SELECT)
+        List<Comment> comments = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(SELECT)
         ) {
             statement.setString(1, game);
             ResultSet resultSet = statement.executeQuery();
-            List<Comment> comments = new ArrayList<>();
             while (resultSet.next()) {
                 comments.add(new Comment(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getTimestamp(4)));
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             throw new CommentException("Problem while getting comments", e);
         }
-        return List.of();
+        return comments;
     }
+
 
     @Override
     public void reset() throws CommentException {

@@ -34,8 +34,9 @@ public class ConsoleUI {
     public void play() {
         System.out.print("Enter your name: ");
         playerName = scanner.nextLine().trim();
-        System.out.print("Enter game name for save: ");
-        gameName = scanner.nextLine().trim();
+        //System.out.print("Enter game name for save: ");
+        //gameName = scanner.nextLine().trim();
+        gameName = "Tetravex";
         difficulty = field.getSize();
         moveCount = 0;
         startTime = System.currentTimeMillis();
@@ -173,21 +174,32 @@ public class ConsoleUI {
             playAgain = true;
             field = Field.createField(field.getSize());
             play();
+            return;
         } else if (input.equals("T")) {
             List<Score> scores = scoreService.getTopScores(gameName);
             System.out.println("Top Scores:");
             for (Score score : scores) {
                 System.out.println(score.getPlayer() + " - " + score.getPoints());
             }
+            return;
         } else if (input.equals("C")) {
             List<Comment> comments = commentService.getComments(gameName);
-            System.out.println("Game Comments:");
-            for (Comment comment : comments) {
-                System.out.println(comment.getPlayer() + ": " + comment.getComment());
+            if (comments.isEmpty()) {
+                System.out.println("No comments yet.");
+            } else {
+                System.out.println("Game Comments:");
+                for (Comment comment : comments) {
+                    System.out.println("Player: " + comment.getPlayer());
+                    System.out.println("Comment: " + comment.getComment());
+                    System.out.println("Commented on: " + comment.getCommentedOn());
+                    System.out.println("------------------------------");
+                }
             }
+            return;
         } else if (input.equals("V")) {
             int averageRating = ratingService.getAverageRating(gameName);
             System.out.println("Average Rating: " + averageRating);
+            return;
         }
 
         var matcher = INPUT_PATTERN.matcher(input);
@@ -206,6 +218,7 @@ public class ConsoleUI {
             System.out.println("Invalid input! Use format 'A1 B2' to swap tiles.");
         }
     }
+
 
     private int calculateScore(int difficulty, long timeTaken, int moveCount) {
         int baseScore = 5000; // Base score to start with
