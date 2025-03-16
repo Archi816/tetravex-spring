@@ -8,6 +8,6 @@ pom.xml.releaseBackup
 .DS_Store
 .classpath
 .mvn
-.target
+target/
 .project
 .settings/" >> .gitignore
