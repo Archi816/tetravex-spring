@@ -1,7 +1,6 @@
 package sk.tuke.app.consoleUI;
 
 import sk.tuke.app.core.Field;
-import sk.tuke.app.core.Tile;
 
 import sk.tuke.app.entity.Comment;
 import sk.tuke.app.entity.Score;
@@ -24,31 +23,37 @@ public class ConsoleUI {
     private String gameName;
     private String playerName;
     private int moveCount;
-    int difficulty;
+    private int difficulty;
 
     public ConsoleUI(Field field) {
         this.field = field;
     }
 
     public void play() {
-        System.out.print("Enter your name: ");
-        playerName = scanner.nextLine().trim();
-        //System.out.print("Enter game name for save: ");
-        //gameName = scanner.nextLine().trim();
-        gameName = "Tetravex";
-        difficulty = field.getSize();
-        moveCount = 0;
-        startTime = System.currentTimeMillis();
+        initializeGame();
 
-        while (!field.isGameWon() ) {
-            printField();
+        while (!field.isGameWon()) {
+            FieldRender.printField(field, System.currentTimeMillis() - startTime);
             processInput();
             moveCount++;
         }
 
+        handleGameEnd();
+    }
+
+    private void initializeGame() {
+        System.out.print("Enter your name: ");
+        playerName = scanner.nextLine().trim();
+        gameName = "Tetravex";
+        difficulty = field.getSize();
+        moveCount = 0;
+        startTime = System.currentTimeMillis();
+    }
+
+    private void handleGameEnd() {
         long timeTaken = (System.currentTimeMillis() - startTime) / 1000;
         System.out.println("Congratulations! You solved the puzzle!");
-        System.out.println("Time taken: " + (System.currentTimeMillis() - startTime) / 1000.0 + " seconds");
+        System.out.println("Time taken: " + timeTaken + " seconds");
         System.out.println("Total moves: " + moveCount);
 
         int scoreValue = calculateScore(difficulty, timeTaken, moveCount);
@@ -56,10 +61,13 @@ public class ConsoleUI {
 
         askForRating();
         askForComment();
+        askPlayAgain();
+    }
 
-        System.out.println("Play again? (Y/n): " );
-
+    private void askPlayAgain() {
+        System.out.print("Play again? (Y/n): ");
         String input = scanner.nextLine().trim().toUpperCase();
+
         while (true) {
             if (input.equals("Y")) {
                 System.out.println("Starting a new game...");
@@ -70,12 +78,10 @@ public class ConsoleUI {
                 System.out.println("Thanks for playing!");
                 System.exit(0);
             } else {
-                System.out.println("Invalid input! Please enter 'Y' or 'N'.");
-                System.out.print("Play again? (Y/n): ");
+                System.out.print("Invalid input! Please enter 'Y' or 'N': ");
                 input = scanner.nextLine().trim().toUpperCase();
             }
         }
-
     }
 
     private void askForRating() {
@@ -101,103 +107,67 @@ public class ConsoleUI {
         }
     }
 
-    public void printField() {
-        long elapsedTime = System.currentTimeMillis() - startTime;
-        long timeTillNextDisplayChange = 1000 - (elapsedTime % 1000);
-        System.out.println("\nCurrent Field State:");
-        System.out.println("Time elapsed: " + formatTime(elapsedTime));
-        System.out.println("Enter 'T' to view top scores, 'C' for comments, 'V' for average rating.");
-
-        //columns
-        System.out.print("    ");
-        for (int col = 0; col < field.getSize(); col++) {
-            System.out.print("    " + (col + 1) + "   ");
-        }
-        System.out.println();
-        System.out.println();
-
-        //Print top edge of current row
-        for (int row = 0; row < field.getSize(); row++) {
-            System.out.print("    ");
-            for (int col = 0; col < field.getSize(); col++) {
-                Tile tile = field.getTile(row, col);
-                if (tile != null) {
-                    System.out.print(" |  " + tile.getTop() + "  |");
-                } else {
-                    System.out.print("       ");
-                }
-            }
-            System.out.println();
-
-            //Print rows coordinates
-            System.out.print((char) ('A' + row));
-            System.out.print("    ");
-            //Print left and right edge of current tile
-            for (int col = 0; col < field.getSize(); col++) {
-                Tile tile = field.getTile(row, col);
-                if (tile != null) {
-                    System.out.print("|" + tile.getLeft() + " x " + tile.getRight() + "| ");
-                } else {
-                    System.out.print("        ");
-                }
-            }
-            System.out.println();
-
-            // Print the bottom edge of each tile in current row
-            System.out.print("    ");
-            for (int col = 0; col < field.getSize(); col++) {
-                Tile tile = field.getTile(row, col);
-                if (tile != null) {
-                    System.out.print(" |  " + tile.getBottom() + "  |");
-                } else {
-                    System.out.print("       ");
-                }
-            }
-            System.out.println();
-            System.out.println();
-        }
-    }
-
     private void processInput() {
         System.out.print("\nEnter move (e.g., A1 B2 to swap tiles) \n'X' to exit\n'R' to restart: ");
         String input = scanner.nextLine().trim().toUpperCase();
 
-        if (input.equals("X")) {
-            System.out.println("Game exited.");
-            System.exit(0);
-        } else if (input.equals("R")) {
-            System.out.println("Game restarted.");
-            startTime = System.currentTimeMillis();
-            field = Field.createField(field.getSize());
-            play();
-            return;
-        } else if (input.equals("T")) {
-            List<Score> scores = scoreService.getTopScores(gameName);
-            System.out.println("Top Scores:");
-            for (Score score : scores) {
-                System.out.println(score.getPlayer() + " - " + score.getPoints());
-            }
-            return;
-        } else if (input.equals("C")) {
-            List<Comment> comments = commentService.getComments(gameName);
-            if (comments.isEmpty()) {
-                System.out.println("No comments yet.");
-            } else {
-                System.out.println("Game Comments:");
-                for (Comment comment : comments) {
-                    System.out.println("Player: " + comment.getPlayer());
-                    System.out.println("Comment: " + comment.getComment());
-                    System.out.println("Commented on: " + comment.getCommentedOn());
-                    System.out.println("------------------------------");
-                }
-            }
-            return;
-        } else if (input.equals("V")) {
-            int averageRating = ratingService.getAverageRating(gameName);
-            System.out.println("Average Rating: " + averageRating);
-            return;
+        switch (input) {
+            case "X":
+                System.out.println("Game exited.");
+                System.exit(0);
+                break;
+            case "R":
+                restartGame();
+                break;
+            case "T":
+                showTopScores();
+                break;
+            case "C":
+                showComments();
+                break;
+            case "V":
+                showAverageRating();
+                break;
+            default:
+                handleTileSwap(input);
+                break;
         }
+    }
 
+    private void restartGame() {
+        System.out.println("Game restarted.");
+        startTime = System.currentTimeMillis();
+        field = Field.createField(field.getSize());
+        play();
+    }
+
+    private void showTopScores() {
+        List<Score> scores = scoreService.getTopScores(gameName);
+        System.out.println("Top Scores:");
+        scores.forEach(score -> System.out.println(score.getPlayer() + " - " + score.getPoints()));
+    }
+
+    private void showComments() {
+        List<Comment> comments = commentService.getComments(gameName);
+        if (comments.isEmpty()) {
+            System.out.println("No comments yet.");
+        } else {
+            System.out.println("Game Comments:");
+            comments.forEach(comment -> {
+                System.out.println("Player: " + comment.getPlayer());
+                System.out.println("Comment: " + comment.getComment());
+                System.out.println("Commented on: " + comment.getCommentedOn());
+                System.out.println("------------------------------");
+            });
+        }
+    }
+
+    private void showAverageRating() {
+        int averageRating = ratingService.getAverageRating(gameName);
+        System.out.println("Average Rating: " + averageRating);
+    }
+
+    private void handleTileSwap(String input) {
         var matcher = INPUT_PATTERN.matcher(input);
         if (matcher.matches()) {
             int row1 = matcher.group(1).charAt(0) - 'A';
@@ -214,7 +184,6 @@ public class ConsoleUI {
             System.out.println("Invalid input! Use format 'A1 B2' to swap tiles.");
         }
     }
-
 
     private int calculateScore(int difficulty, long timeTaken, int moveCount) {
         int baseScore = 5000; // Base score to start with
@@ -234,7 +203,6 @@ public class ConsoleUI {
         int finalScore = (int) (baseScore * difficultyMultiplier) - timePenalty - movePenalty;
         return Math.max(finalScore, 0);
     }
-
 
     private String formatTime(long miliseconds) {
         long seconds = miliseconds / 1000;
