@@ -18,7 +18,6 @@ public class ConsoleUI {
     private final Scanner scanner = new Scanner(System.in);
     private static final Pattern INPUT_PATTERN = Pattern.compile("([A-Z])([1-9])\\s([A-Z])([1-9])");
     private long startTime;
-    private boolean playAgain = false;
     private final ScoreService scoreService = new ScoreServiceJDBC();
     private final RatingService ratingService = new RatingServiceJDBC();
     private final CommentService commentService = new CommentServiceJDBC();
@@ -41,11 +40,10 @@ public class ConsoleUI {
         moveCount = 0;
         startTime = System.currentTimeMillis();
 
-        while (!field.isGameWon() || playAgain) {
+        while (!field.isGameWon() ) {
             printField();
             processInput();
             moveCount++;
-            playAgain = false;
         }
 
         long timeTaken = (System.currentTimeMillis() - startTime) / 1000;
@@ -67,7 +65,6 @@ public class ConsoleUI {
                 System.out.println("Starting a new game...");
                 startTime = System.currentTimeMillis();
                 field = Field.createField(field.getSize());
-                playAgain = true;
                 play();
             } else if (input.equals("N")) {
                 System.out.println("Thanks for playing!");
@@ -171,7 +168,6 @@ public class ConsoleUI {
         } else if (input.equals("R")) {
             System.out.println("Game restarted.");
             startTime = System.currentTimeMillis();
-            playAgain = true;
             field = Field.createField(field.getSize());
             play();
             return;
