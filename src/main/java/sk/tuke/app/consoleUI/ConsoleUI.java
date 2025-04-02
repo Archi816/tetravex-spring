@@ -1,11 +1,9 @@
 package sk.tuke.app.consoleUI;
 
 import sk.tuke.app.core.Field;
-
 import sk.tuke.app.entity.Comment;
 import sk.tuke.app.entity.Score;
 import sk.tuke.app.entity.Rating;
-
 import sk.tuke.app.service.*;
 
 import java.util.List;
@@ -17,16 +15,19 @@ public class ConsoleUI {
     private final Scanner scanner = new Scanner(System.in);
     private static final Pattern INPUT_PATTERN = Pattern.compile("([A-Z])([1-9])\\s([A-Z])([1-9])");
     private long startTime;
-    private final ScoreService scoreService = new ScoreServiceJDBC();
-    private final RatingService ratingService = new RatingServiceJDBC();
-    private final CommentService commentService = new CommentServiceJDBC();
+    private final ScoreService scoreService;
+    private final RatingService ratingService;
+    private final CommentService commentService;
     private String gameName;
     private String playerName;
     private int moveCount;
     private int difficulty;
 
-    public ConsoleUI(Field field) {
+    public ConsoleUI(Field field, ScoreService scoreService, RatingService ratingService, CommentService commentService) {
         this.field = field;
+        this.scoreService = scoreService;
+        this.ratingService = ratingService;
+        this.commentService = commentService;
     }
 
     public void play() {
