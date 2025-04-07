@@ -10,8 +10,8 @@ public class Field {
         this.size = size;
         this.tiles = new Tile[size][size];
         //generateRandomTiles();
-        generateSolvedGrid();
-        shuffleGrid();
+        //generateSolvedGrid();
+        //shuffleGrid();
     }
 
     public static Field createField(int size) {

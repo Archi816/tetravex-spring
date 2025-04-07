@@ -1,31 +1,28 @@
 package sk.tuke.app;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.web.client.RestTemplate;
 import sk.tuke.app.consoleUI.ConsoleUI;
 import sk.tuke.app.core.Field;
-import sk.tuke.app.service.ScoreService;
-import sk.tuke.app.service.ScoreServiceJPA;
-import sk.tuke.app.service.RatingService;
-import sk.tuke.app.service.RatingServiceJPA;
-import sk.tuke.app.service.CommentService;
-import sk.tuke.app.service.CommentServiceJPA;
+import sk.tuke.app.service.*;
 
 import java.util.Scanner;
 
 @SpringBootApplication
 @Configuration
+@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX,
+        pattern = "sk.tuke.app.server.*"))
 public class SpringClient {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(SpringClient.class)
-                .web(WebApplicationType.NONE)
-                .run(args);
+        new SpringApplicationBuilder(SpringClient.class).web(WebApplicationType.NONE).run(args);
     }
 
     @Bean
@@ -39,6 +36,11 @@ public class SpringClient {
     }
 
     @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
     public Field field() {
         int size = selectDifficulty();
         return new Field(size);
@@ -46,17 +48,17 @@ public class SpringClient {
 
     @Bean
     public ScoreService scoreService() {
-        return new ScoreServiceJPA();
+        return new ScoreServiceRestClient();
     }
 
     @Bean
     public RatingService ratingService() {
-        return new RatingServiceJPA();
+        return new RatingServiceRestClient();
     }
 
     @Bean
     public CommentService commentService() {
-        return new CommentServiceJPA();
+        return new CommentServiceRestClient();
     }
 
     private int selectDifficulty() {
@@ -81,4 +83,6 @@ public class SpringClient {
             }
         }
     }
+
+
 }

@@ -1,5 +1,6 @@
 package sk.tuke.app.service;
 
+import org.springframework.stereotype.Component;
 import sk.tuke.app.entity.Comment;
 import sk.tuke.app.entity.Rating;
 
@@ -7,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CommentServiceJDBC implements CommentService {
     public static final String URL = "jdbc:postgresql://localhost/gamestudio";
     private static final String USER = "postgres";

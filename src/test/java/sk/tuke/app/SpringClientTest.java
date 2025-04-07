@@ -2,6 +2,7 @@ package sk.tuke.app;
 
 import org.junit.jupiter.api.Test;
 import sk.tuke.app.consoleUI.ConsoleUI;
+import sk.tuke.app.core.Field;
 import sk.tuke.app.core.GameManager;
 import sk.tuke.app.core.Tile;
 import sk.tuke.app.service.*;
@@ -11,6 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for simple App.
+ * IMPORTANT!!!! Before using test you must comment 2 lines in Field.java
+ * public Field(int size) {
+ *         this.size = size;
+ *         this.tiles = new Tile[size][size];
+ *         //generateRandomTiles();
+ *         //generateSolvedGrid();
+ *         //shuffleGrid();
+ *     }
+ *     here is example
  */
 public class SpringClientTest {
 
@@ -24,25 +34,31 @@ public class SpringClientTest {
     }
 
     @Test
+    void testFieldInitialization() {
+        Field field = new Field(3); // Create a 3x3 field
+        assertNotNull(field);
+    }
+
+    @Test
     void testTilePlacement() {
-        GameManager gameManager = new GameManager(3);
+        Field field = new Field(3);
         Tile tile = new Tile(1, 2, 3, 4);
-        assertTrue(gameManager.placeTile(tile, 0, 0));
+        assertTrue(field.placeTile(tile, 0, 0));
     }
 
     @Test
     void testInvalidTilePlacement() {
-        GameManager gameManager = new GameManager(3);
+        Field field = new Field(3);
         Tile tile1 = new Tile(1, 2, 3, 4);
         Tile tile2 = new Tile(5, 6, 7, 8);
 
-        gameManager.placeTile(tile1, 0, 0);
-        assertFalse(gameManager.placeTile(tile2, 0, 1));
+        field.placeTile(tile1, 0, 0);
+        assertFalse(field.placeTile(tile2, 0, 0));
     }
 
     @Test
-    void testWinningCondition() {
-        GameManager gameManager = new GameManager(3);
+    void testGridWinCondition() {
+        Field field = new Field(3);
 
         Tile tile1 = new Tile(1, 1, 2, 3);
         Tile tile2 = new Tile(2, 7, 4, 1);
@@ -54,30 +70,27 @@ public class SpringClientTest {
         Tile tile8 = new Tile(7, 4, 9, 9);
         Tile tile9 = new Tile(8, 6, 3, 4);
 
-        gameManager.placeTile(tile1, 0, 0);
-        gameManager.placeTile(tile2, 0, 1);
-        gameManager.placeTile(tile3, 0, 2);
-        gameManager.placeTile(tile4, 1, 0);
-        gameManager.placeTile(tile5, 1, 1);
-        gameManager.placeTile(tile6, 1, 2);
-        gameManager.placeTile(tile7, 2, 0);
-        gameManager.placeTile(tile8, 2, 1);
-        gameManager.placeTile(tile9, 2, 2);
+        field.placeTile(tile1, 0, 0);
+        field.placeTile(tile2, 0, 1);
+        field.placeTile(tile3, 0, 2);
+        field.placeTile(tile4, 1, 0);
+        field.placeTile(tile5, 1, 1);
+        field.placeTile(tile6, 1, 2);
+        field.placeTile(tile7, 2, 0);
+        field.placeTile(tile8, 2, 1);
+        field.placeTile(tile9, 2, 2);
 
-        assertTrue(gameManager.checkWinCondition());
+        assertTrue(field.isGameWon());
     }
 
     @Test
     void testFieldPrinting() {
-        // Setup
         GameManager gameManager = new GameManager(3);
 
-        // Mock or create necessary services
-        ScoreService scoreService = new ScoreServiceJPA();  // Or use a mock
+        ScoreService scoreService = new ScoreServiceJPA();
         RatingService ratingService = new RatingServiceJPA();
         CommentService commentService = new CommentServiceJPA();
 
-        // Pass all required arguments to ConsoleUI
         ConsoleUI consoleUI = new ConsoleUI(gameManager.getField(), scoreService, ratingService, commentService);
 
         Tile tile1 = new Tile(1, 2, 3, 4);

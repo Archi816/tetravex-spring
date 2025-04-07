@@ -14,7 +14,7 @@ public class ScoreServiceJPA implements ScoreService {
 
     @Override
     public void addScore(Score score) {
-        entityManager.persist(score);  // Saves the entity in the database
+        entityManager.persist(score);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class ScoreServiceJPA implements ScoreService {
 
     @Override
     public void reset() {
-        entityManager.createNamedQuery("Score.resetScores").executeUpdate();
+        throw new UnsupportedOperationException("Not supported via web service");
     }
 }

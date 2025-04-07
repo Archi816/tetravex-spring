@@ -1,5 +1,6 @@
 package sk.tuke.app.service;
 
+import org.springframework.stereotype.Component;
 import sk.tuke.app.entity.Score;
 
 import java.sql.*;
@@ -7,7 +8,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class ScoreServiceJDBC implements ScoreService {
     public static final String URL = "jdbc:postgresql://localhost/gamestudio";
     public static final String USER = "postgres";

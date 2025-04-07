@@ -9,7 +9,7 @@ import sk.tuke.app.service.*;
 
 @SpringBootApplication
 @Configuration
-@EntityScan("sk.tuke.app.entity")
+@EntityScan("sk.tuke.app")
 public class GameStudioServer {
     public static void main(String[] args) {
         SpringApplication.run(GameStudioServer.class, args);

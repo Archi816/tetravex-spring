@@ -1,5 +1,6 @@
 package sk.tuke.app.consoleUI;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import sk.tuke.app.core.Field;
 import sk.tuke.app.entity.Comment;
 import sk.tuke.app.entity.Score;
@@ -15,8 +16,11 @@ public class ConsoleUI {
     private final Scanner scanner = new Scanner(System.in);
     private static final Pattern INPUT_PATTERN = Pattern.compile("([A-Z])([1-9])\\s([A-Z])([1-9])");
     private long startTime;
+    @Autowired
     private final ScoreService scoreService;
+    @Autowired
     private final RatingService ratingService;
+    @Autowired
     private final CommentService commentService;
     private String gameName;
     private String playerName;
