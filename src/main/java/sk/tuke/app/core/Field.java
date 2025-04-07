@@ -10,7 +10,7 @@ public class Field {
         this.size = size;
         this.tiles = new Tile[size][size];
         //generateRandomTiles();
-        //generateSolvedGrid();
+        generateSolvedGrid();
         //shuffleGrid();
     }
 

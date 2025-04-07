@@ -1,6 +1,7 @@
 package sk.tuke.app;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import sk.tuke.app.consoleUI.ConsoleUI;
 import sk.tuke.app.core.Field;
 import sk.tuke.app.core.GameManager;

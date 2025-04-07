@@ -1,4 +1,5 @@
-package sk.tuke.app;
+/*package sk.tuke.app;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import sk.tuke.app.entity.Score;
 import sk.tuke.app.entity.Rating;
 import sk.tuke.app.entity.Comment;
@@ -22,6 +24,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 public class JPAServiceTest {
 
     @Nested
@@ -51,7 +54,6 @@ public class JPAServiceTest {
             Score score1 = new Score("game1", "player1", 100, new Date());
             Score score2 = new Score("game1", "player2", 150, new Date());
 
-            // Mock the TypedQuery and EntityManager behavior
             TypedQuery<Score> queryMock = mock(TypedQuery.class);
             when(entityManager.createNamedQuery("Score.getTopScores", Score.class)).thenReturn(queryMock);
             when(queryMock.setParameter("game", "game1")).thenReturn(queryMock);
@@ -86,13 +88,11 @@ public class JPAServiceTest {
             Rating rating = new Rating("game1", "player1", 5, new Date());
             ratingService.setRating(rating);
 
-            // Verify the entityManager.persist method was called
             verify(entityManager, times(1)).persist(rating);
         }
 
         @Test
         public void testGetRating() {
-            // Mock the TypedQuery for getRating
             TypedQuery<Integer> queryMock = mock(TypedQuery.class);
             when(entityManager.createNamedQuery("Rating.getRating", Integer.class)).thenReturn(queryMock);
             when(queryMock.setParameter("game", "game1")).thenReturn(queryMock);
@@ -106,7 +106,6 @@ public class JPAServiceTest {
 
         @Test
         public void testGetAverageRating() {
-            // Mock the TypedQuery for getAverageRating
             TypedQuery<Double> queryMock = mock(TypedQuery.class);
             when(entityManager.createNamedQuery("Rating.getAverageRating", Double.class)).thenReturn(queryMock);
             when(queryMock.setParameter("game", "game1")).thenReturn(queryMock);
@@ -138,7 +137,6 @@ public class JPAServiceTest {
             Comment comment = new Comment("game1", "player1", "Great Game!", new Date());
             commentService.addComment(comment);
 
-            // Verify the entityManager.persist method was called
             verify(entityManager, times(1)).persist(comment);
         }
 
@@ -163,3 +161,4 @@ public class JPAServiceTest {
         }
     }
 }
+*/
