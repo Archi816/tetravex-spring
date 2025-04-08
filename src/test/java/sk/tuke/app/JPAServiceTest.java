@@ -1,4 +1,4 @@
-/*package sk.tuke.app;
+package sk.tuke.app;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -161,4 +161,3 @@ public class JPAServiceTest {
         }
     }
 }
-*/
