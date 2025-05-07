@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game comments</title>
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/comments.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header-container container">
+            <a th:href="@{/}"><img class="header-logo" th:src="@{/images/game-logo.png}" alt="Tetravex Logo"></a>
+            <div class="header-link-block">
+                <ul class="header-list">
+                    <li><a class="header-list-link hover-underline" th:href="@{/}">Main page</a></li>
+                    <li><a class="header-list-link hover-underline" th:href="@{/leaderboard}">Leaderboard</a></li>
+                    <li><a class="header-list-link hover-underline" th:href="@{/comment}">Game comments</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="comments-page page">
+        <div class="container">
+            <h1>Comments</h1>
+            <table class="comments-table">
+                <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="comment : ${comments}">
+                    <td>
+                        <div class="username"><strong th:text="${comment.player}"></strong></div>
+                    </td>
+                    <td>
+                        <div class="comment-body" th:text="${comment.comment}"></div>
+                    </td>
+                    <td>
+                        <span class="comment-date" th:text="${#dates.format(comment.commentedOn, 'dd.MM.yyyy HH:mm')}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <p>© 2025 Tetravex. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

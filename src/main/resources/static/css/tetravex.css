@@ -1,0 +1,121 @@
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.game-info{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0 20px 0px;
+}
+
+.game-info p{
+    margin: 5px 0;
+}
+
+.restart-button{
+    background-color: #efeeee;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    width: 150px;
+    height: 40px;
+}
+
+.request-block form {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.request-block label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.request-block input[type="text"],
+.request-block input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+    gap: 5px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    margin: 0 0 4px 0;
+    transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: gold;
+}
+
+.request-block input[type="text"]:focus,
+.request-block input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.request-block .button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.request-block .button:hover {
+    background-color: #0056b3;
+}
+
+.request-block .button:active {
+    transform: scale(0.98);
+}
+
+.request-block p {
+    margin: 8px 0;
+}
+
+.tile-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #EFF1C5;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+
+

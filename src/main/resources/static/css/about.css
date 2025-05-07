@@ -1,0 +1,54 @@
+.about-intro{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.about-intro h1{
+    font-size: 24px;
+}
+
+.flex-blocks{
+    display: flex;
+
+    gap: 20px;
+}
+
+.flex-block{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 33.3333%;
+    min-height: 300px;
+    line-height: 25px;
+}
+
+.flex-block a{
+    color: green;
+    transition: all 0.3s ease;
+}
+
+.flex-block a:hover{
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+#other-menu {
+    display: none;
+}
+
+.block-image-flex {
+    display: none;
+    gap: 20px;
+}
+
+
+.block-image-flex img{
+    width: 50px;
+    height: 50px;
+}
+

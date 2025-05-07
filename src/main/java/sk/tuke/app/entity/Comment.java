@@ -10,6 +10,7 @@ import java.util.Date;
         @NamedQuery(name = "Comment.getComments", query = "SELECT c FROM Comment c WHERE c.game=:game ORDER BY c.commentedOn DESC"),
         @NamedQuery(name = "Comment.resetComments", query = "DELETE FROM Comment c")
 })
+@Table(name = "comment")
 public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

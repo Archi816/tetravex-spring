@@ -5,13 +5,14 @@ import java.util.Random;
 public class Field {
     private final int size;
     private final Tile[][] tiles;
+    private final long startMillis = System.currentTimeMillis();
 
     public Field(int size) {
         this.size = size;
         this.tiles = new Tile[size][size];
         //generateRandomTiles();
         generateSolvedGrid();
-        //shuffleGrid();
+        shuffleGrid();
     }
 
     public static Field createField(int size) {
@@ -122,5 +123,16 @@ public class Field {
             tiles[x2][y2] = temp;
         }
     }
+
+    public int getPlayingTime() {
+        return (int) ((System.currentTimeMillis() - startMillis) / 1000);
+    }
+
+    public int getScore() {
+        int baseTime = size * size * 30;
+        int elapsedTime = getPlayingTime();
+        return Math.max(baseTime - elapsedTime, 0);
+    }
+
 }
 

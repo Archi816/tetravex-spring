@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/leaderboard.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header-container container">
+            <a th:href="@{/}"><img class="header-logo" th:src="@{/images/game-logo.png}" alt="Tetravex Logo"></a>
+            <div class="header-link-block">
+                <ul class="header-list">
+                    <li><a class="header-list-link hover-underline" th:href="@{/}">Main page</a></li>
+                    <li><a class="header-list-link hover-underline" th:href="@{/leaderboard}">Leaderboard</a></li>
+                    <li><a class="header-list-link hover-underline" th:href="@{/comment}">Game comments</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="leaderboard-page page">
+        <div class="container">
+            <h1>Leaderboard</h1>
+            <table class="leaderboard-table">
+                <thead>
+                <tr>
+                    <th class="rank-header">Rank</th>
+                    <th class="player-header">Player</th>
+                    <th class="score-header">Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="score, iterStat : ${scores}" class="leaderboard-row">
+                    <td class="rank" th:text="${iterStat.index + 1}"></td>
+                    <td class="player" th:text="${score.player}"></td>
+                    <td class="score" th:text="${score.points}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <p>© 2025 Tetravex. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

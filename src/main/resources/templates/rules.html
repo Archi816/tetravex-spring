@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game rules</title>
+    <link th:href="@{/css/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/rules.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-container container">
+                <a th:href="@{/}"><img class="header-logo" th:src="@{/images/game-logo.png}" alt="Tetravex Logo"></a>
+                <div class="header-link-block">
+                    <ul class="header-list">
+                        <li><a class="header-list-link hover-underline" th:href="@{/}">Main page</a></li>
+                        <li><a class="header-list-link hover-underline" th:href="@{/leaderboard}">Leaderboard</a></li>
+                        <li><a class="header-list-link hover-underline" th:href="@{/comment}">Game comments</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="rules container">
+                <div class="rules__intro">
+                    <h2 class="rules__heading">Welcome to Tetravex!</h2>
+                    <p class="rules__description">
+                        Challenge your brain with this puzzle game. Match tiles by numbers and train your logic!
+                    </p>
+                </div>
+                <div class="rules__content">
+                    <div class="half">
+                        <div class="rules__block">
+                            <div class="rules__text">
+                                <h3 class="rules__subtitle">How to Play</h3>
+                                <ul class="rules__list">
+                                    <li class="rules__item">Click on two tiles on the board</li>
+                                    <li class="rules__item">Match the numbers on adjacent tiles.</li>
+                                    <li class="rules__item">Complete the puzzle to finish the game.</li>
+                                </ul>
+                            </div>
+                            <div class="rules__image">
+                                <img th:src="@{/images/game-image1.png}" alt="Game Example">
+                            </div>
+                        </div>
+
+                        <div class="rules__block">
+                            <div class="rules__text">
+                                <h3 class="rules__subtitle">Tips for Winning</h3>
+                                <ul class="rules__list">
+                                    <li class="rules__item">Start with tiles that have unique numbers.</li>
+                                    <li class="rules__item">Solve edges and corners first.</li>
+                                    <li class="rules__item">Stay patient and focus!</li>
+                                </ul>
+                            </div>
+                            <div class="rules__image">
+                                <img th:src="@{/images/game-image2.png}" alt="Strategy Example">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rules__block">
+                        <h3 class="rules__subtitle">Difficulty Levels</h3>
+                        <ul class="rules__list">
+                            <li class="rules__item">Easy: 3×3 grid</li>
+                            <li class="rules__item">Medium: 4×4 grid</li>
+                            <li class="rules__item">Hard: 6×6 grid</li>
+                            <li class="rules__item">Impossible: 10×10 grid</li>
+                        </ul>
+                    </div>
+
+                    <div class="rules__block">
+                        <h3 class="rules__subtitle">Scoring</h3>
+                        <ul class="rules__list">
+                            <li class="rules__item">The faster you solve the puzzle, the higher your score.</li>
+                            <li class="rules__item">Top scores are displayed in the Leaderboards.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div>
+                <p>Good luck and have fun! 🎯</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

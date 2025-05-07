@@ -191,7 +191,7 @@ public class ConsoleUI {
     }
 
     private int calculateScore(int difficulty, long timeTaken, int moveCount) {
-        int baseScore = 5000; // Base score to start with
+        int baseScore = 5000;
         double difficultyMultiplier;
 
         switch (difficulty) {

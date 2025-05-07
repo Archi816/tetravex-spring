@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetravex</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-container container">
+                <a th:href="@{/}"><img class="header-logo" th:src="@{/images/game-logo.png}" alt="Tetravex Logo"></a>
+
+                <div class="header-link-block">
+                    <ul class="header-list">
+                        <li><a class="header-list-link hover-underline" th:href="@{/leaderboard}">Leaderboard</a></li>
+                        <li><a class="header-list-link hover-underline" th:href="@{/comment}">Game comments</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="page">
+            <div class="page-wrapper">
+                <div class="container">
+                    <div class="game-intro">
+                        <div class="hero">
+                            <h1>Welcome to Tetravex!</h1>
+                            <p>Challenge your brain with this puzzle game.</p>
+                        </div>
+                        <div class="intro-actions">
+                            <ul class="intro-actions-list">
+                                <div class="form-container">
+                                <li><button class="intro-actions-link" href="#" onclick="toggleForm()">Start game</button></li>
+                                    <div>
+                                        <form id="start-game-form"  th:action="@{/tetravex/new}" method="get" class="difficulty-form">
+                                            <label for="difficulty" class="form-label">Difficulty:</label><br>
+                                            <select name="difficulty" id="difficulty" class="form-select">
+                                                <option value="3">3x3</option>
+                                                <option value="4">4x4</option>
+                                                <option value="6">6x6</option>
+                                                <option value="10">10x10</option>
+                                            </select><br><br>
+                                            <button type="submit" class="submit-btn">Start</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <li><a class="intro-actions-link" th:href="@{/leaderboard}">Leaderboards</a></li>
+                                <li><a class="intro-actions-link" th:href="@{/comment}">Game comments</a></li>
+                                <li><a class="intro-actions-link" th:href="@{/rules}">Rules</a></li>
+                                <li><a class="intro-actions-link" th:href="@{/about}">About</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>
+                <p>©  2025 Tetravex. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script th:src="@{/script/script.js}"></script>
+</body>
+</html>

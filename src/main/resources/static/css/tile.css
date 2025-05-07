@@ -1,0 +1,128 @@
+.tile{
+    width: 80px;
+    height: 80px;
+    box-sizing: border-box;
+}
+
+.tile-container{
+    width: 100%;
+    height: 100%;
+    border: 3px solid #333333;
+    position: relative;
+}
+
+.tile-block{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.tile-part{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tile-left, .tile-right{
+    padding: 0 5px;
+}
+
+.tile-bottom, .tile-top{
+    padding: 5px 0;
+    text-align: center;
+    align-self: center;
+}
+
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tile-number{
+    font-size: 16px;
+}
+
+.left-divider,
+.right-divider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.tile.selected {
+    border: 2px solid yellow;
+    background-color: rgba(255, 255, 0, 0.2);
+}
+
+.left-divider::before,
+.right-divider::before {
+    content: " ";
+    position: absolute;
+    width: 105px;
+    height: 2px;
+    background-color: #333333;
+}
+
+.left-divider::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.right-divider::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.tile-grid {
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+.tile-row {
+    display: flex;
+}
+
+.color-blue {
+    color: #8E5572;
+}
+
+.color-green {
+    color: #4CAF50;
+}
+
+.color-red {
+    color: #F44336;
+}
+
+.color-yellow {
+    color: #659157;
+}
+
+.color-purple {
+    color: #9C27B0;
+}
+
+.color-orange {
+    color: #FF9800;
+}
+
+.color-pink {
+    color: #E91E63;
+}
+
+.color-brown {
+    color: #093A3E;
+}
+
+.color-teal {
+    color: #009688;
+}
+
+.color-gray {
+    color: #046E8F;
+}
+

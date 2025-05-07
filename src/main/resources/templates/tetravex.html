@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetravex Web</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/tetravex.css}">
+    <link rel="stylesheet" th:href="@{/css/tile.css}">
+    <link th:href="@{/css/leaderboard.css}" rel="stylesheet" />
+    <link th:href="@{/css/comments.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Tetravex</h1>
+<div class="wrapper">
+    <header class="header">
+        <div class="header-container container">
+            <a th:href="@{/}"><img class="header-logo" th:src="@{/images/game-logo.png}" alt="Tetravex Logo"></a>
+            <div class="header-link-block">
+                <ul class="header-list">
+                    <li><a class="header-list-link hover-underline" th:href="@{/leaderboard}">Leaderboard</a></li>
+                    <li><a class="header-list-link hover-underline" th:href="@{/comment}">Game comments</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <section class="page">
+        <div class="page-wrapper">
+            <div class="container flex">
+
+                <div class="game-info">
+                    <h1>Game</h1>
+                    <input type="hidden" id="startTime" th:value="${startTime}">
+                    <p>Time: <span id="timer">00:00</span></p>
+                </div>
+
+                <div class="tile-wrapper">
+                    <div id="tileGrid" th:utext="${htmlField}"></div>
+                </div>
+
+                <div class="form-container">
+                    <button class="restart-button" id="new-game-button">New game</button>
+                    <div>
+                        <form id="start-game-form" th:action="@{/tetravex/new}" method="get" class="difficulty-form">
+                            <label for="difficulty" class="form-label">Difficulty:</label><br>
+                            <select name="difficulty" id="difficulty" class="form-select">
+                                <option value="3">3x3</option>
+                                <option value="4">4x4</option>
+                                <option value="6">6x6</option>
+                                <option value="10">10x10</option>
+                            </select><br><br>
+                            <button type="submit" class="submit-btn" id="start-button">Start</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div th:if="${isSolved}">
+                    <div class="request-block">
+                        <h1 class="win-message">Congratulations! You won the game!</h1>
+                        <p>Enter your details below:</p>
+
+                        <form th:action="@{/tetravex/score}" method="post">
+                            <label>Player Name:</label>
+                            <input name="player" type="text" th:required="required"/><br/><br/>
+                            <input type="submit" value="Submit Name" class="button"/><br/>
+                        </form>
+                        <form th:action="@{/tetravex/comment}" method="post">
+                            <label>Player Name:</label>
+                            <input name="player" type="text" th:required="required"/><br/><br/>
+                            <label>Comment:</label>
+                            <input name="comment" type="text" th:required="required"/><br/><br/>
+                            <input type="submit" value="Submit Comment" class="button"/><br/>
+                        </form>
+                        <form th:action="@{/tetravex/rating}" method="post" class="rating-form">
+                            <label>Player Name:</label>
+                            <input name="player" type="text" required/><br/><br/>
+
+                            <label>Rate the Game:</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" required/><label for="star5" title="5 stars">&#9733;</label>
+                                <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="4 stars">&#9733;</label>
+                                <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="3 stars">&#9733;</label>
+                                <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="2 stars">&#9733;</label>
+                                <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="1 star">&#9733;</label>
+                            </div>
+
+                            <br/>
+                            <input type="submit" value="Submit Rating" class="button"/>
+                        </form>
+                    </div>
+                </div>
+
+                <h2>Leaderboard</h2>
+                <table class="leaderboard-table">
+                    <thead>
+                    <tr>
+                        <th class="rank-header">Rank</th>
+                        <th class="player-header">Player</th>
+                        <th class="score-header">Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="score, iterStat : ${scores}" class="leaderboard-row">
+                        <td class="rank" th:text="${iterStat.index + 1}"></td>
+                        <td class="player" th:text="${score.player}"></td>
+                        <td class="score" th:text="${score.points}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h2>Comments</h2>
+                <table class="comments-table">
+                    <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Comment</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="comment : ${comments}">
+                        <td>
+                            <div class="username"><strong th:text="${comment.player}"></strong></div>
+                        </td>
+                        <td>
+                            <div class="comment-body" th:text="${comment.comment}"></div>
+                        </td>
+                        <td>
+                            <span class="comment-date" th:text="${#dates.format(comment.commentedOn, 'dd.MM.yyyy HH:mm')}"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<script th:src="@{/script/script.js}"></script>
+</body>
+</html>

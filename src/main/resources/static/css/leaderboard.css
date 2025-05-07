@@ -1,0 +1,57 @@
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-table th {
+    background-color: #A7754D;
+    color: white;
+    font-weight: bold;
+    padding: 12px 15px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.leaderboard-table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.rank {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.player {
+    font-size: 16px;
+    color: #34495e;
+}
+
+.score {
+    font-size: 16px;
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.leaderboard-table tr:last-child td {
+    border-bottom: none;
+}
+
+.leaderboard-table tr:nth-child(odd) {
+    background-color: #ecf0f1;
+}
+
+.leaderboard-table tr:nth-child(even) {
+    background-color: #ffffff;
+}

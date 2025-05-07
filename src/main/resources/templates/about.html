@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/about.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-container container">
+                <a th:href="@{/}"><img class="header-logo" th:src="@{/images/game-logo.png}" alt="Tetravex Logo"></a>
+                <div class="header-link-block">
+                    <ul class="header-list">
+                        <li><a class="header-list-link hover-underline" th:href="@{/}">Main page</a></li>
+                        <li><a class="header-list-link hover-underline" th:href="@{/leaderboard}">Leaderboard</a></li>
+                        <li><a class="header-list-link hover-underline" th:href="@{/comment}">Game comments</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <section class="page">
+            <div class="page-wrapper">
+                <div class="container">
+                    <section class="about-intro">
+                        <h1>About Tetravex</h1>
+                        <p>Tetravex is a brain-bending puzzle game designed to challenge your logic and spatial reasoning.</p>
+                    </section>
+
+                    <div class="flex-blocks">
+                    <section class="game-story flex-block">
+                        <h2>Our Story</h2>
+                        <p>Born from our love for puzzles, Tetravex was created to provide players with a unique experience that’s both challenging and fun.</p>
+                    </section>
+
+                    <section class="future-plans flex-block">
+                        <h2>What's Next</h2>
+                        <p>We are always looking to improve Tetravex. Future updates will include new levels, better gameplay mechanics, and much more!</p>
+                    </section>
+
+                        <div class="contact flex-block">
+                            <h2>Contact Us</h2>
+                            <p>If you have any questions or feedback, feel free to reach out!</p>
+                            <p>Email: <a href="mailto:support@tetravex.com">support@tetravex.com</a></p>
+                            <p>Follow me on Twitter: <a href="https://twitter.com/TetravexGame" target="_blank">@TetravexGame</a></p>
+                            <p><a href="javascript:void(0);" id="other-link">Other</a></p>
+                            <div class="block-image-flex" id="other-menu">
+                                <a href="https://github.com/Archi816"><img class="flex-block-image" src="/images/icon-github.svg" alt="Github"></a>
+                                <a href="https://www.linkedin.com/in/polianetskyi-artem-6601b3319/"><img class="flex-block-image" src="/images/icon-linkedin.svg" alt="LinkedIn"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div>
+                <p>©  2025 Tetravex. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script th:src="@{/script/about.js}"></script>
+</body>
+</html>
